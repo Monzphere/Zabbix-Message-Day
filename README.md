@@ -31,8 +31,7 @@
         Seu apoio nos ajuda a manter este projeto ativo e a continuar desenvolvendo novas funcionalidades.<br>
         Qualquer contribuição é muito bem-vinda e faz toda a diferença! 💙
     </p>
-    <br>
-    
+    <br>    
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
         <h4>💰 Faça sua doação via PIX:</h4>
         <br>
@@ -43,9 +42,7 @@
             <small>Escaneie o QR Code ou use a chave PIX acima</small>
         </p>
     </div>
-    
     <br>
-    
     <h4>🌟 Outras formas de apoiar:</h4>
     <p>
         ⭐ Dê uma estrela no GitHub<br>
@@ -53,9 +50,7 @@
         📢 Compartilhe com outros desenvolvedores<br>
         💻 Contribua com código
     </p>
-    
     <br>
-    
     <p>
         <em>Obrigado por apoiar projetos open source brasileiros! 🇧🇷</em>
     </p>

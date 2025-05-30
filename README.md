@@ -38,7 +38,8 @@
         <br>
         <p>
             <strong>Chave PIX:</strong> 57.361.246/0001-06<br>
-            <small>Escaneie o QR Code ou use a chave PIX acima</small>
+            <img src="![image](https://github.com/user-attachments/assets/e9c67037-65cb-4ac1-96cc-9609cb296619)">
+            <small>Escaneie o QR Code ou use a chave PIX acima</small>                 
         </p>
     </div>
     <br>
@@ -54,7 +55,6 @@
         <em>Obrigado por apoiar projetos open source brasileiros! 🇧🇷</em>
     </p>
 </div>
-![image](https://github.com/user-attachments/assets/e9c67037-65cb-4ac1-96cc-9609cb296619)
 ---
 ---
 

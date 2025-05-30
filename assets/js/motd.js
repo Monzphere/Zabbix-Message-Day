@@ -15,6 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Processar cada mensagem
     messages.forEach((message, index) => {
+        // VERIFICAÇÃO ADICIONAL: Respeitar show_since no frontend
+        const currentTime = Math.floor(Date.now() / 1000); // timestamp atual
+        
+        // Se tem show_since definido, verificar se já chegou na hora
+        if (message.show_since) {
+            const showSinceTime = new Date(message.show_since).getTime() / 1000;
+            if (showSinceTime > currentTime) {
+                // Ainda não chegou na hora de mostrar esta mensagem
+                return; // Pular para a próxima mensagem
+            }
+        }
+        
         const root = document.documentElement;
         
         // Template atualizado para incluir show_since se disponível

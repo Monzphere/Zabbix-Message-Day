@@ -32,6 +32,10 @@ class MotdFormSubmit extends BaseAction
     {
         $this->module->storage->begin();
         $input = json_decode(file_get_contents('php://input'), true);
+        
+        // Verificar se repeat está habilitado para ajustar validação
+        $repeat_enabled = isset($input['repeat']) && $input['repeat'] == Message::REPEAT_ENABLED;
+        
         $rules = [
             'id'                    => 'id',
             'status'                => 'in '.implode(',', [Message::STATUS_DISABLED, Message::STATUS_ENABLED]),
@@ -43,15 +47,19 @@ class MotdFormSubmit extends BaseAction
             'active_till'           => 'required|abs_time',
             'active_till_color'     => 'string',
             'repeat'                => 'in '.implode(',', [Message::REPEAT_DISABLED, Message::REPEAT_ENABLED]),
-            'repeat_interval'       => 'in '.implode(',', [Message::REPEAT_DAY, Message::REPEAT_WEEK, Message::REPEAT_MONTH, Message::REPEAT_YEAR]),
-            'repeat_frequency'      => 'int32',
-            'repeat_end_type'       => 'in '.implode(',', [Message::REPEAT_END_NEVER, Message::REPEAT_END_DATE, Message::REPEAT_END_COUNT]),
-            'repeat_end_date'       => 'abs_time',
-            'repeat_end_count'      => 'int32',
             'message'               => 'required|not_empty|string',
             'message_color'         => 'string',
             'allow_html'            => 'in 0,1'
         ];
+        
+        // Adicionar regras de repeat apenas se repeat estiver habilitado
+        if ($repeat_enabled) {
+            $rules['repeat_interval'] = 'in '.implode(',', [Message::REPEAT_DAY, Message::REPEAT_WEEK, Message::REPEAT_MONTH, Message::REPEAT_YEAR]);
+            $rules['repeat_frequency'] = 'int32';
+            $rules['repeat_end_type'] = 'in '.implode(',', [Message::REPEAT_END_NEVER, Message::REPEAT_END_DATE, Message::REPEAT_END_COUNT]);
+            $rules['repeat_end_date'] = 'abs_time';
+            $rules['repeat_end_count'] = 'int32';
+        }
 
         $valid = $this->validateInput($rules) && $this->validateTime();
 
@@ -121,30 +129,45 @@ class MotdFormSubmit extends BaseAction
 
         $this->getInputs($message, Message::FIELDS);
 
-        if ($this->getInput('repeat', Message::REPEAT_DISABLED) == Message::REPEAT_DISABLED) {
+        // Verificar se repeat está desabilitado ANTES de processar outros campos
+        $repeat_enabled = $this->getInput('repeat', Message::REPEAT_DISABLED) == Message::REPEAT_ENABLED;
+        
+        if (!$repeat_enabled) {
+            // Remover campos de repeat do message e definir valores padrão
             unset($message['repeat_interval'], $message['repeat_frequency'], $message['repeat_end_type'], $message['repeat_end_date'], $message['repeat_end_count']);
+            $message['repeat'] = Message::REPEAT_DISABLED;
         }
 
-        if ($this->getInput('repeat_end_type', Message::REPEAT_END_NEVER) != Message::REPEAT_END_DATE) {
+        // Limpar campos de data de fim baseado no tipo
+        if (!$repeat_enabled || $this->getInput('repeat_end_type', Message::REPEAT_END_NEVER) != Message::REPEAT_END_DATE) {
             unset($message['repeat_end_date']);
         }
 
-        if ($this->getInput('repeat_end_type', Message::REPEAT_END_NEVER) != Message::REPEAT_END_COUNT) {
+        if (!$repeat_enabled || $this->getInput('repeat_end_type', Message::REPEAT_END_NEVER) != Message::REPEAT_END_COUNT) {
             unset($message['repeat_end_count']);
         }
 
+        // Processar campos de tempo
         foreach (['show_since', 'active_since', 'active_till', 'repeat_end_date'] as $time_field) {
-            if ($this->hasInput($time_field) && !empty($message[$time_field])) {
+            if ($this->hasInput($time_field) && !empty($message[$time_field]) && isset($message[$time_field])) {
                 $message[$time_field] = strtotime($message[$time_field]);
             } else if ($time_field === 'show_since') {
                 $message[$time_field] = null;
             }
         }
 
-        foreach (['repeat', 'repeat_interval', 'repeat_frequency', 'repeat_end_type', 'repeat_end_count'] as $int_field) {
-            if ($this->hasInput($int_field)) {
-                $message[$int_field] = intval($message[$int_field]);
+        // Processar campos inteiros apenas se repeat estiver habilitado
+        if ($repeat_enabled) {
+            foreach (['repeat_interval', 'repeat_frequency', 'repeat_end_type', 'repeat_end_count'] as $int_field) {
+                if ($this->hasInput($int_field) && isset($message[$int_field])) {
+                    $message[$int_field] = intval($message[$int_field]);
+                }
             }
+        }
+        
+        // Sempre processar o campo repeat
+        if ($this->hasInput('repeat')) {
+            $message['repeat'] = intval($message['repeat']);
         }
 
         // Processar allow_html como checkbox

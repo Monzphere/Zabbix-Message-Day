@@ -72,22 +72,50 @@ class Message
     {
         $this->storage->begin();
 
+        // CORRIGIDO: Buscar todas as mensagens habilitadas, não apenas as ativas
         $messages = $this->storage->get([
             'status' => Message::STATUS_ENABLED,
-            'state' => Message::STATE_ACTIVE,
             'sort' => [['field' => 'active_since', 'order' => ZBX_SORT_UP]]
         ]);
 
         if (!$messages) {
             setcookie('motd_message', '', 0);
-
             return;
         }
 
-        // Processar todas as mensagens ativas
-        $data = [];
+        // CORRIGIDO: Filtrar mensagens baseado no show_since e active_till
+        $current_time = time();
+        $valid_messages = [];
+        
         foreach ($messages as $message) {
-            $messageData = [
+            // Verificar se a mensagem já expirou
+            if ($message['active_till'] && $message['active_till'] < $current_time) {
+                continue; // Mensagem expirada
+            }
+            
+            // Se tem show_since definido, verificar se já chegou na hora de mostrar
+            if (!empty($message['show_since'])) {
+                if ($message['show_since'] <= $current_time) {
+                    $valid_messages[] = $message;
+                }
+                // Se ainda não chegou na hora do show_since, pular esta mensagem
+            } else {
+                // Se não tem show_since, verificar se já está no período ativo
+                if ($message['active_since'] <= $current_time) {
+                    $valid_messages[] = $message;
+                }
+            }
+        }
+
+        if (empty($valid_messages)) {
+            setcookie('motd_message', '', 0);
+            return;
+        }
+
+        // Preparar dados para múltiplas mensagens
+        $messages_data = [];
+        foreach ($valid_messages as $message) {
+            $data = [
                 'message' => $message['message'],
                 'active_since' => date('Y-m-d H:i', $message['active_since']),
                 'active_till' => date('Y-m-d H:i', $message['active_till']),
@@ -97,21 +125,21 @@ class Message
 
             // Adicionar cores específicas se disponíveis
             if (!empty($message['active_since_color'])) {
-                $messageData['active_since_color'] = $message['active_since_color'];
+                $data['active_since_color'] = $message['active_since_color'];
             }
             if (!empty($message['active_till_color'])) {
-                $messageData['active_till_color'] = $message['active_till_color'];
+                $data['active_till_color'] = $message['active_till_color'];
             }
 
             // Adicionar show_since se disponível
             if (!empty($message['show_since'])) {
-                $messageData['show_since'] = date('Y-m-d H:i', $message['show_since']);
-                $messageData['show_since_color'] = $message['show_since_color'] ?: '1f65f4';
+                $data['show_since'] = date('Y-m-d H:i', $message['show_since']);
+                $data['show_since_color'] = $message['show_since_color'] ?: '1f65f4';
             }
             
-            $data[] = $messageData;
+            $messages_data[] = $data;
         }
 
-        setcookie('motd_message', base64_encode(json_encode($data)), 0);
+        setcookie('motd_message', base64_encode(json_encode($messages_data)), 0);
     }
 }

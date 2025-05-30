@@ -78,14 +78,17 @@ class FileStorage extends StorageAbstract
                 continue;
             }
 
-            if ($end_ts >= $ts && $active_ts <= $ts) {
-                if (!$message['show_since'] || $message['show_since'] <= $ts) {
-                    $message['state'] = Message::STATE_ACTIVE;
-                } else {
-                    $message['state'] = Message::STATE_APPROACHING;
-                }
+            $current_time = time();
+            
+            if ($message['show_since'] && $message['show_since'] > $current_time) {
+                unset($messages[$i]);
+                continue;
             }
-            else if ($end_ts < $ts) {
+
+            if ($end_ts >= $current_time && $active_ts <= $current_time) {
+                $message['state'] = Message::STATE_ACTIVE;
+            }
+            else if ($end_ts < $current_time) {
                 $message['state'] = Message::STATE_EXPIRED;
             }
             else {

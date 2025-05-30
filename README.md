@@ -151,46 +151,26 @@ This functionality will enable better text formatting and more interactive messa
 
 - Clone repository on your server <!-- !!! repository !!! -->
     ```sh
-    git clone https://github.com/monzphere/Zabbix-UI-Modules-Message-of-the-Day.git
+    git clone https://github.com/Monzphere/Zabbix-Message-Day.git
     ``` 
 
 - Change the ownership of the directory to the user under which your Zabbix frontend is running using the `chown` command, some examples:
   - default OS users
     ```sh
-    chown nginx:nginx ./Zabbix-UI-Modules-Message-of-the-Day*
+    chown nginx:nginx ./Zabbix-Message-Day*
     ``` 
     ```sh
-    chown apache:apache ./Zabbix-UI-Modules-Message-of-the-Day*
+    chown apache:apache ./Zabbix-Message-Day*
     ``` 
     ```sh
-    chown www-data:www-data ./Zabbix-UI-Modules-Message-of-the-Day*
+    chown www-data:www-data ./Zabbix-Message-Day*
     ``` 
 
 - Go to Zabbix frontend menu -> Administration -> General -> Modules
-<div align="center">
-    <img src="./.readme/installation/menu.png" width="200">
-</div>
-
 - Use the Scan directory button on the top
-<div align="center">
-    <img src="./.readme/installation/scan_directory.png" width="1000">
-</div>
-
 - Enable the newly discovered module
-<div align="center">
-    <img src="./.readme/installation/enable.png" width="1000">
-</div>
-
 - Done
-<div align="center">
-    <img src="./.readme/installation/enable_done.png" width="1000">
-</div>
-
 - Use it and enjoy!
-<div align="center">
-    <img src="./.readme/installation/motd.png" width="1000">
-</div>
-
 <!-- *********************************************************************************************************************************** -->
 <!-- *** FOOTER ************************************************************************************************************************ -->
 <!-- *********************************************************************************************************************************** -->

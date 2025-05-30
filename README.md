@@ -34,7 +34,7 @@
     <br>    
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
         <h4>💰 Faça sua doação via PIX:</h4>
-        <br>![image](https://github.com/user-attachments/assets/e9c67037-65cb-4ac1-96cc-9609cb296619)
+        <br>
         <br>
         <p>
             <strong>Chave PIX:</strong> 57.361.246/0001-06<br>
@@ -54,7 +54,7 @@
         <em>Obrigado por apoiar projetos open source brasileiros! 🇧🇷</em>
     </p>
 </div>
-
+![image](https://github.com/user-attachments/assets/e9c67037-65cb-4ac1-96cc-9609cb296619)
 ---
 ---
 

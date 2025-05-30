@@ -38,7 +38,7 @@
         <br>
         <p>
             <strong>Chave PIX:</strong> 57.361.246/0001-06<br>
-            <img src="https://drive.google.com/file/d/1F_V0sVmqM3Ko0nujZP9gpJDLoO9xA0LI/view"  width="1000">
+            <img src="https://drive.google.com/uc?export=view&id=1F_V0sVmqM3Ko0nujZP9gpJDLoO9xA0LI">
             <small>Escaneie o QR Code ou use a chave PIX acima</small>                 
         </p>
     </div>

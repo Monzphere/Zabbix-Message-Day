@@ -1,1 +1,211 @@
-# Zabbix-Message-Day
+<!-- *********************************************************************************************************************************** -->
+<!-- *** HEADER ************************************************************************************************************************ -->
+<!-- *********************************************************************************************************************************** -->
+<div align="center">
+    <h1>Message of the Day - Monzphere Fork</h1>
+    <h4>
+        Este é um fork do projeto original desenvolvido pela initMAX s.r.o.<br>
+        Repositório original: <a href="https://git.initmax.cz/initMAX-Public/Zabbix-UI-Modules-Message-of-the-Day">https://git.initmax.cz/initMAX-Public/Zabbix-UI-Modules-Message-of-the-Day</a>
+    </h4>
+    <br>
+    <h3>
+        <span>
+            Módulo Zabbix para informar usuários sobre eventos importantes
+        </span>
+    </h3>
+</div>
+<br>
+<br>
+
+---
+---
+
+<div align="center">
+    <h1>
+        Message of the Day
+    </h1>
+    <h4>
+        Informs Zabbix users about important events. Provides a centralized location for sharing critical updates, maintenance notifications, or other relevant information.
+    </h4>
+    <br>
+    <img alt="Static Badge" src="https://img.shields.io/badge/Required%20Zabbix%20version-7.0-red">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Required%20php%20version-8.0-blue">
+    <h3>
+        <a href="#description">Description</a> •
+        <a href="#key_features">Key features</a> •
+        <a href="#installation">Installation</a>
+    </h3>
+</div>
+<br>
+
+<!-- *********************************************************************************************************************************** -->
+<!-- *** BODY ************************************************************************************************************************** -->
+<!-- *********************************************************************************************************************************** -->
+<div align="center">
+    <img src="./.readme/screen/dashboard.png" width="1000">
+</div>
+<br>
+<br>
+
+## Description
+This Zabbix module informs users and administrators about important events. It provides a centralized location for sharing critical updates, maintenance notifications, or other relevant information to all system users.
+
+<!-- *********************************************************************************************************************************** -->
+<br>
+
+## Key features
+Enhance communication with Zabbix users and administrators with customizable notifications. Adjust message appearance using color coding to effectively prioritize information. The three-tiered timing system ("Show since", "Active since", "Active till") offers precise control over message visibility and relevance.
+
+The repeat function automates recurring notifications, ideal for scheduled maintenance or periodic updates. This feature streamlines communication processes and ensures consistent information delivery.
+
+This tool enable administrators to deliver clear, timely, and professional communications, improving operational awareness for all users.
+
+<!-- *********************************************************************************************************************************** -->
+<br>
+
+### Message bar
+Displays important notifications at the top of all application pages, including the message content with 'Active since' and 'Active till' dates. While closable, it reappears on page reload, ensuring critical information is not missed. This persistent behavior prevents users from claiming unawareness of important events.
+
+<div align="center">
+    <img src="./.readme/screen/bar.png" width="1000">
+</div>
+
+<!-- *********************************************************************************************************************************** -->
+<br>
+
+### Administration screen
+The administration interface, accessible to users with Super Admin rights, provides a dedicated platform for managing message events within the system. It offers a clear overview of all configured notifications.
+
+Users can efficiently organize and locate messages using filters for name, state (Any, Active, Approaching, Expired), and status (All, Enabled, Disabled). This functionality allows for quick access to relevant messages, including the ability to view and manage disabled notifications directly from the status column.
+
+<div align="center">
+    <img src="./.readme/screen/administration_motd.png" width="1000">
+</div>
+
+<!-- *********************************************************************************************************************************** -->
+<br>
+
+### Repeat messages
+
+The repeat option enables scheduling of regular, repeating messages. When activated, it offers flexible configuration:
+
+Set the frequency of repetition, choosing from daily, weekly, monthly, or yearly intervals. Fine-tune by specifying the number of days, weeks, months, or years between occurrences.
+
+Define the duration of the recurring message series. Choose to repeat indefinitely, set a specific end date, or limit to a certain number of occurrences.
+
+<div align="center">
+    <img src="./.readme/screen/repeate.png" width="500">
+</div>
+
+<!-- *********************************************************************************************************************************** -->
+<br>
+
+### HTML tags support
+(Upcoming feature)
+
+In an upcoming version, we plan to introduce support for HTML tags in messages. This feature will allow:
+
+Insertion of HTML tags into messages for enhanced formatting.
+Ability to include clickable links directly in the message bar.
+
+This functionality will enable better text formatting and more interactive message content, improving the overall user experience. Stay tuned for this enhancement in a future release.
+
+**Example:**
+  - `Upgrade Zabbix environment to 7.0.0 (<a href="https://www.zabbix.com/rn/rn7.0.0">Zabbix Release Notes</a>)`
+    > Upgrade Zabbix environment to 7.0.0 (<a href="https://www.zabbix.com/rn/rn7.0.0">Zabbix Release Notes</a>)
+
+<!-- *********************************************************************************************************************************** -->
+<br>
+
+### Configuration popup
+
+<div align="center">
+    <img src="./.readme/screen/configuration_popup.png" width="500">
+</div>
+
+<div align="center">
+
+| Required | Field               | Description                                                                                                               |
+|:--------:|---------------------|---------------------------------------------------------------------------------------------------------------------------|
+| ❗        | **Name**            | The name of the event.                                                                                                    |
+|          | **Show since**      | Used to inform users in advance that an event will occur. Specifies the date and time from which the message is displayed to users. Additionally, it is possible to define the color of the message bar until the event becomes active.  |
+| ❗        | **Active since**    | Specifies the point in time from which the event is active. During this period, it is possible to define the color of the message bar to indicate the event's status. |
+| ❗        | **Active till**     | The point in time when the event is deactivated.                                                                           |
+|          | **Repeat**          | This option allows you to set recurrence for displaying regular messages.                                                  |
+| ❗        | **Message**         | The message for users that will be displayed in the message bar.                                                           |
+| ❗        | **Allow HTML tags** | Enable HTML tag translation in the message bar. (IN DEVELOPMENT)                                                                            |
+
+</div>
+
+<!-- *********************************************************************************************************************************** -->
+<br>
+<br>
+
+## Installation
+- Connect to your Zabbix frontend server (perform on all frontend nodes) via SSH.
+
+- Navigate to the `ui/modules/` directory (`ui` is typically located at `/usr/share/zabbix/`)
+    ```sh
+    cd /usr/share/zabbix/modules/
+    ```
+
+- Clone repository on your server <!-- !!! repository !!! -->
+    ```sh
+    git clone https://github.com/monzphere/Zabbix-UI-Modules-Message-of-the-Day.git
+    ``` 
+
+- Change the ownership of the directory to the user under which your Zabbix frontend is running using the `chown` command, some examples:
+  - default OS users
+    ```sh
+    chown nginx:nginx ./Zabbix-UI-Modules-Message-of-the-Day*
+    ``` 
+    ```sh
+    chown apache:apache ./Zabbix-UI-Modules-Message-of-the-Day*
+    ``` 
+    ```sh
+    chown www-data:www-data ./Zabbix-UI-Modules-Message-of-the-Day*
+    ``` 
+
+- Go to Zabbix frontend menu -> Administration -> General -> Modules
+<div align="center">
+    <img src="./.readme/installation/menu.png" width="200">
+</div>
+
+- Use the Scan directory button on the top
+<div align="center">
+    <img src="./.readme/installation/scan_directory.png" width="1000">
+</div>
+
+- Enable the newly discovered module
+<div align="center">
+    <img src="./.readme/installation/enable.png" width="1000">
+</div>
+
+- Done
+<div align="center">
+    <img src="./.readme/installation/enable_done.png" width="1000">
+</div>
+
+- Use it and enjoy!
+<div align="center">
+    <img src="./.readme/installation/motd.png" width="1000">
+</div>
+
+<!-- *********************************************************************************************************************************** -->
+<!-- *** FOOTER ************************************************************************************************************************ -->
+<!-- *********************************************************************************************************************************** -->
+<br>
+<br>
+
+---
+---
+<div align="center">
+    <h4>
+        Fork mantido por Monzphere<br>
+        Baseado no trabalho original da initMAX s.r.o.<br>
+        <br>
+        <a>
+            <img src="./.readme/logo/agplv3.png" width="100">
+        </a>
+    </h4>
+</div>

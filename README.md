@@ -17,6 +17,50 @@
 <br>
 <br>
 
+<!-- *********************************************************************************************************************************** -->
+<!-- *** SUPPORT *********************************************************************************************************************** -->
+<!-- *********************************************************************************************************************************** -->
+<br>
+<br>
+
+## 🤝 Apoie este Projeto
+
+<div align="center">
+    <h3>Gostou do projeto? Considere apoiar nosso trabalho!</h3>
+    <p>
+        Seu apoio nos ajuda a manter este projeto ativo e a continuar desenvolvendo novas funcionalidades.<br>
+        Qualquer contribuição é muito bem-vinda e faz toda a diferença! 💙
+    </p>
+    <br>
+    
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <h4>💰 Faça sua doação via PIX:</h4>
+        <br>
+         ![image](https://github.com/user-attachments/assets/27a78014-7908-479e-b9cc-caaae8685650)
+        <br>
+        <p>
+            <strong>Chave PIX:</strong> 57.361.246/0001-06<br>
+            <small>Escaneie o QR Code ou use a chave PIX acima</small>
+        </p>
+    </div>
+    
+    <br>
+    
+    <h4>🌟 Outras formas de apoiar:</h4>
+    <p>
+        ⭐ Dê uma estrela no GitHub<br>
+        🐛 Reporte bugs ou sugestões<br>
+        📢 Compartilhe com outros desenvolvedores<br>
+        💻 Contribua com código
+    </p>
+    
+    <br>
+    
+    <p>
+        <em>Obrigado por apoiar projetos open source brasileiros! 🇧🇷</em>
+    </p>
+</div>
+
 ---
 ---
 
@@ -180,8 +224,5 @@ This functionality will enable better text formatting and more interactive messa
         Fork mantido por Monzphere<br>
         Baseado no trabalho original da initMAX s.r.o.<br>
         <br>
-        <a>
-            <img src="./.readme/logo/agplv3.png" width="100">
-        </a>
     </h4>
 </div>

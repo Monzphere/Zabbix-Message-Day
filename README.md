@@ -66,9 +66,8 @@ This tool enable administrators to deliver clear, timely, and professional commu
 ### Message bar
 Displays important notifications at the top of all application pages, including the message content with 'Active since' and 'Active till' dates. While closable, it reappears on page reload, ensuring critical information is not missed. This persistent behavior prevents users from claiming unawareness of important events.
 
-<div align="center">
-    <img src="./.readme/screen/bar.png" width="1000">
-</div>
+![image](https://github.com/user-attachments/assets/b2a019dd-8a0d-4195-b964-1e9f6aef9fdc)
+
 
 <!-- *********************************************************************************************************************************** -->
 <br>
@@ -78,9 +77,8 @@ The administration interface, accessible to users with Super Admin rights, provi
 
 Users can efficiently organize and locate messages using filters for name, state (Any, Active, Approaching, Expired), and status (All, Enabled, Disabled). This functionality allows for quick access to relevant messages, including the ability to view and manage disabled notifications directly from the status column.
 
-<div align="center">
-    <img src="./.readme/screen/administration_motd.png" width="1000">
-</div>
+![image](https://github.com/user-attachments/assets/6a19933d-2f8a-477c-800c-3f7b4ceb2d4a)
+
 
 <!-- *********************************************************************************************************************************** -->
 <br>
@@ -93,9 +91,7 @@ Set the frequency of repetition, choosing from daily, weekly, monthly, or yearly
 
 Define the duration of the recurring message series. Choose to repeat indefinitely, set a specific end date, or limit to a certain number of occurrences.
 
-<div align="center">
-    <img src="./.readme/screen/repeate.png" width="500">
-</div>
+![image](https://github.com/user-attachments/assets/d4e91cc6-66d0-419a-9740-f1b2e3821f0f)
 
 <!-- *********************************************************************************************************************************** -->
 <br>
@@ -128,10 +124,10 @@ This functionality will enable better text formatting and more interactive messa
 | Required | Field               | Description                                                                                                               |
 |:--------:|---------------------|---------------------------------------------------------------------------------------------------------------------------|
 | ❗        | **Name**            | The name of the event.                                                                                                    |
-|          | **Show since**      | Used to inform users in advance that an event will occur. Specifies the date and time from which the message is displayed to users. Additionally, it is possible to define the color of the message bar until the event becomes active.  |
+| ❗        | **Show since**      | Used to inform users in advance that an event will occur. Specifies the date and time from which the message is displayed to users. Additionally, it is possible to define the color of the message bar until the event becomes active.  |
 | ❗        | **Active since**    | Specifies the point in time from which the event is active. During this period, it is possible to define the color of the message bar to indicate the event's status. |
 | ❗        | **Active till**     | The point in time when the event is deactivated.                                                                           |
-|          | **Repeat**          | This option allows you to set recurrence for displaying regular messages.                                                  |
+|            | **Repeat**          | This option allows you to set recurrence for displaying regular messages.                                                  |
 | ❗        | **Message**         | The message for users that will be displayed in the message bar.                                                           |
 | ❗        | **Allow HTML tags** | Enable HTML tag translation in the message bar. (IN DEVELOPMENT)                                                                            |
 
